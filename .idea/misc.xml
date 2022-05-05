@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/lab.android/AndroidStudioProjects/CurriculoAndroid/app/src/main/res/drawable/color_btn.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/lab.android/AndroidStudioProjects/CurriculoAndroid/app/src/main/res/layout/activity_livros.xml" value="0.1921875" />
-        <entry key="..\:/Users/lab.android/AndroidStudioProjects/CurriculoAndroid/app/src/main/res/layout/activity_main.xml" value="0.1921875" />
+        <entry key="..\:/Users/lab.android/AndroidStudioProjects/CurriculoAndroid/app/src/main/res/layout/activity_main.xml" value="0.33" />
       </map>
     </option>
   </component>

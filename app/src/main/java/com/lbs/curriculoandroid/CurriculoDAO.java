@@ -8,16 +8,16 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LivroDAO {
+public class CurriculoDAO {
 
-    public static void inserir(Context context, Livro livro){
+    public static void inserir(Context context, Curriculo curriculo){
         Banco conn = new Banco(context);
         SQLiteDatabase db = conn.getWritableDatabase();
 
         ContentValues valores = new ContentValues();
-        valores.put("titulo", livro.getTitulo() );
-        valores.put("autor", livro.getAutor() );
-        valores.put("codGenero", livro.getGenero().getId() );
+        valores.put("titulo", curriculo.getTitulo() );
+        valores.put("autor", curriculo.getAutor() );
+        valores.put("codGenero", curriculo.getGenero().getId() );
 
         db.insert("livro", null, valores);
 
@@ -25,16 +25,16 @@ public class LivroDAO {
     }
 
 
-    public static void editar(Context context, Livro livro){
+    public static void editar(Context context, Curriculo curriculo){
         Banco conn = new Banco(context);
         SQLiteDatabase db = conn.getWritableDatabase();
 
         ContentValues valores = new ContentValues();
-        valores.put("titulo", livro.getTitulo() );
-        valores.put("autor", livro.getAutor() );
-        valores.put("codGenero", livro.getGenero().getId() );
+        valores.put("titulo", curriculo.getTitulo() );
+        valores.put("autor", curriculo.getAutor() );
+        valores.put("codGenero", curriculo.getGenero().getId() );
 
-        db.update("livro",  valores, " id = " + livro.getId(), null);
+        db.update("livro",  valores, " id = " + curriculo.getId(), null);
 
         db.close();
     }
@@ -51,7 +51,7 @@ public class LivroDAO {
 
 
 
-    public static List<Livro> getLivros(Context context){
+    public static List<Curriculo> getLivros(Context context){
         Banco conn = new Banco(context);
         SQLiteDatabase db = conn.getReadableDatabase();
 
@@ -62,7 +62,7 @@ public class LivroDAO {
                         " ORDER BY l.titulo ",
                 null );
 
-        List<Livro> lista = new ArrayList<>();
+        List<Curriculo> lista = new ArrayList<>();
 
         if( cursor.getCount() > 0 ){
             cursor.moveToFirst();
@@ -72,7 +72,7 @@ public class LivroDAO {
                 g.setId(  cursor.getInt( 3 ) );
                 g.setNome(  cursor.getString( 4 ) );
 
-                Livro l = new Livro();
+                Curriculo l = new Curriculo();
                 l.setId( cursor.getInt(0));
                 l.setTitulo( cursor.getString(1));
                 l.setAutor( cursor.getString(2));

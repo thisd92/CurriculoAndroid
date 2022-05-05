@@ -1,23 +1,23 @@
 package com.lbs.curriculoandroid;
 
-public class Livro {
+public class Curriculo {
 
     public int id;
     public String titulo, autor;
     public Genero genero;
 
 
-    public Livro() {
+    public Curriculo() {
 
     }
 
-    public Livro(String titulo, String autor, Genero genero) {
+    public Curriculo(String titulo, String autor, Genero genero) {
         this.titulo = titulo;
         this.autor = autor;
         this.genero = genero;
     }
 
-    public Livro(int id, String titulo, String autor, Genero genero) {
+    public Curriculo(int id, String titulo, String autor, Genero genero) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;

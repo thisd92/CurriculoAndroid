@@ -2,13 +2,21 @@
     <string name="app_name">CurriculoAndroid</string>
 
     <string-array name="generos">
-        <item>Selecione o gênero...</item>
-        <item>Ação</item>
-        <item>Aventura</item>
-        <item>Romance</item>
-        <item>Suspence</item>
-        <item>Variado</item>
+        <item>Enter your gender...</item>
+        <item>Female</item>
+        <item>Male</item>
+        <item>Other</item>
+        <item>I don't wanna tell</item>
     </string-array>
 
+    <string name="txtName">Name:</string>
+    <string name="txtNameHint">Enter your name</string>
+    <string name="txtAge">Age:</string>
+    <string name="txtAgeHint">Enter your age</string>
+    <string name="txtGender">Gender</string>
+    <string name="txtLinkedin">Linkedin</string>
+    <string name="txtLinkedinHint">Enter your Linkedin profile</string>
+    <string name="txtBtn">Save</string>
+    <string name="txtLanguage">What Programming Languages do you know?</string>
 
 </resources>

@@ -5,14 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.List;
 
-public class LivrosActivity extends AppCompatActivity {
+public class CurriculosActivity extends AppCompatActivity {
 
     private ListView lvLivros;
     private Button btnAdicionar;
@@ -20,7 +19,7 @@ public class LivrosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_livros);
+        setContentView(R.layout.activity_curriculos);
 
         lvLivros = findViewById(R.id.lvLivros);
         btnAdicionar = findViewById(R.id.btnAdicionar);
@@ -28,7 +27,7 @@ public class LivrosActivity extends AppCompatActivity {
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LivrosActivity.this, MainActivity.class);
+                Intent intent = new Intent(CurriculosActivity.this, MainActivity.class);
                 intent.putExtra("acao", "inserir");
                 startActivity( intent );
             }
@@ -43,10 +42,10 @@ public class LivrosActivity extends AppCompatActivity {
     }
 
     private void carregarLivros(){
-        List<Livro> lista = LivroDAO.getLivros(this);
+        List<Curriculo> lista = CurriculoDAO.getLivros(this);
 
         if( lista.size() == 0 ){
-            Livro fake = new Livro("Nenhum livro cadastrado", "...", null);
+            Curriculo fake = new Curriculo("Nenhum livro cadastrado", "...", null);
             lista.add( fake );
             lvLivros.setEnabled( false );
         }else {

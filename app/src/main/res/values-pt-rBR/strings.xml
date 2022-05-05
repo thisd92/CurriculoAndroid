@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">CurriculoAndroid</string>
+
+    <string-array name="generos">
+        <item>Enter your gender...</item>
+        <item>Female</item>
+        <item>Male</item>
+        <item>Other</item>
+        <item>I don't wanna tell</item>
+    </string-array>
+
+    <string name="txtName">Nome:</string>
+    <string name="txtNameHint">Digite seu nome</string>
+    <string name="txtAge">Idade:</string>
+    <string name="txtAgeHint">Digite sua idade</string>
+    <string name="txtGender">Gênero</string>
+    <string name="txtLinkedin">Linkedin</string>
+    <string name="txtLinkedinHint">Insira seu perfil do Linkedin</string>
+    <string name="txtBtn">Salvar</string>
+    <string name="txtLanguage">Qual linguagem de programação você conhece?</string>
+
+</resources>

@@ -4,53 +4,188 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_background"
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/etTitulo"
+        android:id="@+id/etNome"
+        style="@style/labels"
         android:layout_width="354dp"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="Digite aqui o título do livro"
+        android:hint="@string/txtNameHint"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/etAutor"
-        android:layout_width="351dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="44dp"
-        android:ems="10"
-        android:hint="Digite aqui o nome do autor..."
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTitulo" />
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/spGenero"
-        android:layout_width="383dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="32dp"
-        android:entries="Teste"
+        android:layout_width="354dp"
+        android:layout_height="50dp"
+        android:entries="@array/generos"
+        app:layout_constraintBottom_toTopOf="@+id/txtLinkedin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/etIdade"
+        style="@style/labels"
+        android:layout_width="354dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="@string/txtAgeHint"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/spGenero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etAutor" />
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/txtNome"
+        style="@style/labels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="@string/txtName"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/etNome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtLinkedin"
+        style="@style/labels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtLinkedin"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/etLinkedin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/labels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtAge"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/etIdade"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/etLinkedin"
+        style="@style/labels"
+        android:layout_width="354dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="@string/txtLinkedinHint"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnSalvar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="Salvar"
+        android:layout_marginBottom="64dp"
+        android:backgroundTint="@color/color_btn"
+        android:text="@string/txtBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        style="@style/txtCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Java"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox3"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintStart_toEndOf="@+id/checkBox2"
+        tools:layout_editor_absoluteY="497dp"
+        tools:ignore="MissingConstraints" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        style="@style/txtCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:text="Kotlin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spGenero" />
+        tools:layout_editor_absoluteY="497dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/labels"
+        android:layout_width="354dp"
+        android:layout_height="63dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/txtLanguage"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        style="@style/txtCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="96dp"
+        android:text="JavaScript"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="497dp"
+        tools:ignore="MissingConstraints" />
+
+    <CheckBox
+        android:id="@+id/checkBox4"
+        style="@style/txtCheckbox"
+        android:layout_width="76dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="52dp"
+        android:text="C#"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+
+    <CheckBox
+        android:id="@+id/checkBox5"
+        style="@style/txtCheckbox"
+        android:layout_width="70dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:text="PHP"
+        app:layout_constraintBottom_toTopOf="@+id/btnSalvar"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox6"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/checkBox4"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <CheckBox
+        android:id="@+id/checkBox6"
+        style="@style/txtCheckbox"
+        android:layout_width="119dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="92dp"
+        android:text="Python"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
