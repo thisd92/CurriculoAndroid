@@ -11,14 +11,7 @@
     <string name="txtBtn">Salvar</string>
     <string name="txtLanguage">Qual linguagem de programação você conhece?</string>
     <string name="txtGit">GitHub</string>
-    <string name="txtGitHint">Enter your GitHub repository</string>
-
-    <!-- <string-array name="gender">
-        <item>Selecione seu gênero...</item>
-        <item>Feminino</item>
-        <item>Masculino</item>
-        <item>Outro</item>
-        <item>Prefiro não dizer...</item>
-    </string-array> -->
+    <string name="txtGitHint">Insira seu repositório do GitHub</string>
+    <string name="btnCadastrar">Cadastrar</string>
 
 </resources>

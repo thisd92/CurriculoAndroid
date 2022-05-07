@@ -12,13 +12,6 @@
     <string name="txtLanguage">What Programming Languages do you know?</string>
     <string name="txtGit">GitHub</string>
     <string name="txtGitHint">Enter your GitHub repository</string>
-
-    <!-- <string-array name="gender">
-        <item>Select your gender...</item>
-        <item>Female</item>
-        <item>Male"</item>
-        <item>Other</item>
-        <item>I don't want to talk</item>
-    </string-array> -->
+    <string name="btnCadastrar">Register</string>
 
 </resources>

@@ -10,78 +10,78 @@ import java.util.List;
 
 public class CurriculoDAO {
 
-    public static void inserir(Context context, Curriculo curriculo){
+    public static void inserir(Context context, Curriculo cv) {
         Banco conn = new Banco(context);
         SQLiteDatabase db = conn.getWritableDatabase();
 
         ContentValues valores = new ContentValues();
-        valores.put("titulo", curriculo.getTitulo() );
-        valores.put("autor", curriculo.getAutor() );
-        valores.put("codGenero", curriculo.getGenero().getId() );
+        valores.put("nome", cv.getNome());
+        valores.put("idade", cv.getIdade());
+        valores.put("genero", cv.getGenero());
+        valores.put("linkedin", cv.getLinkedin());
+        valores.put("github", cv.getGithub());
 
-        db.insert("livro", null, valores);
+
+        db.insert("curriculos", null, valores);
 
         db.close();
     }
 
 
-    public static void editar(Context context, Curriculo curriculo){
+    public static void editar(Context context, Curriculo cv) {
         Banco conn = new Banco(context);
         SQLiteDatabase db = conn.getWritableDatabase();
 
         ContentValues valores = new ContentValues();
-        valores.put("titulo", curriculo.getTitulo() );
-        valores.put("autor", curriculo.getAutor() );
-        valores.put("codGenero", curriculo.getGenero().getId() );
+        valores.put("nome", cv.getNome());
+        valores.put("idade", cv.getIdade());
+        valores.put("genero", cv.getGenero());
+        valores.put("linkedin", cv.getLinkedin());
+        valores.put("github", cv.getGithub());
 
-        db.update("livro",  valores, " id = " + curriculo.getId(), null);
+        db.update("curriculos", valores, " id = " + cv.getId(), null);
 
         db.close();
     }
 
 
-    public static void excluir(Context context, int idLivro){
+    public static void excluir(Context context, int idCurriculo) {
         Banco conn = new Banco(context);
         SQLiteDatabase db = conn.getWritableDatabase();
 
-        db.delete("livro", " id = " + idLivro, null);
+        db.delete("curriculos", " id = " + idCurriculo, null);
 
         db.close();
     }
 
-
-
-    public static List<Curriculo> getLivros(Context context){
+    public static List<Curriculo> getCurriculos(Context context) {
         Banco conn = new Banco(context);
         SQLiteDatabase db = conn.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery(
-                " SELECT l.id, l.titulo, l.autor, g.id, g.nome " +
-                        " FROM livro l " +
-                        " INNER JOIN genero g ON g.id = l.codGenero " +
-                        " ORDER BY l.titulo ",
-                null );
+        /*Cursor cursor = db.rawQuery(
+                " SELECT cv.id, cv.nome, cv.idade, cv.genero, cv.linkedin, cv.github " +
+                        " FROM curriculos cv " +
+                        " ORDER BY cv.nome ",
+                null );*/
 
         List<Curriculo> lista = new ArrayList<>();
 
-        if( cursor.getCount() > 0 ){
+        /*if( cursor.getCount() > 0 ){
             cursor.moveToFirst();
 
             do{
-                Genero g = new Genero();
-                g.setId(  cursor.getInt( 3 ) );
-                g.setNome(  cursor.getString( 4 ) );
 
-                Curriculo l = new Curriculo();
-                l.setId( cursor.getInt(0));
-                l.setTitulo( cursor.getString(1));
-                l.setAutor( cursor.getString(2));
-                l.setGenero( g );
+                Curriculo cv = new Curriculo();
+                cv.setId( cursor.getInt(0));
+                cv.setNome( cursor.getString(1));
+                cv.setIdade( cursor.getInt(2));
+                cv.setGenero( cursor.getString(3));
+                cv.setLinkedin( cursor.getString(4));
+                cv.setGithub( cursor.getString(5));
 
-                lista.add( l );
+                lista.add( cv );
             }while (cursor.moveToNext());
-        }
+        }*/
         return lista;
     }
-
 }

@@ -3,30 +3,30 @@ package com.lbs.curriculoandroid;
 public class Curriculo {
 
     public int id;
-    public String titulo, autor;
-    public Genero genero;
-
+    public String nome, idade, genero, linkedin, github;
 
     public Curriculo() {
 
     }
 
-    public Curriculo(String titulo, String autor, Genero genero) {
-        this.titulo = titulo;
-        this.autor = autor;
+    public Curriculo(String nome, String idade, String genero, String linkedin, String github) {
+        this.nome = nome;
+        this.idade = idade;
         this.genero = genero;
+        this.linkedin = linkedin;
+        this.github = github;
     }
 
-    public Curriculo(int id, String titulo, String autor, Genero genero) {
+    public Curriculo(int id, String nome, String idade, String genero) {
         this.id = id;
-        this.titulo = titulo;
-        this.autor = autor;
+        this.nome = nome;
+        this.idade = idade;
         this.genero = genero;
     }
 
     @Override
     public String toString() {
-        return  titulo + '\n' + autor;
+        return  nome + '\n' + idade;
     }
 
     public int getId() {
@@ -37,27 +37,35 @@ public class Curriculo {
         this.id = id;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getNome() {
+        return nome;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setNome(String titulo) {
+        this.nome = titulo;
     }
 
-    public String getAutor() {
-        return autor;
+    public String getIdade() {
+        return idade;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
+    public void setIdade(String idade) {
+        this.idade = idade;
     }
 
-    public Genero getGenero() {
+    public String getGenero() {
         return genero;
     }
 
-    public void setGenero(Genero genero) {
+    public void setGenero(String genero) {
         this.genero = genero;
     }
+
+    public String getLinkedin() { return linkedin; }
+
+    public void setLinkedin(String linkedin) { this.linkedin = linkedin; }
+
+    public String getGithub() { return github; }
+
+    public void setGithub(String github) { this.github = github;  }
 }
