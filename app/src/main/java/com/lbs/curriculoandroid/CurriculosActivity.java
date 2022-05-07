@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CurriculosActivity extends AppCompatActivity {
 
-    private ListView lvLivros;
+    private ListView cvCurriculos;
     private Button btnAdicionar;
 
     @Override
@@ -21,7 +21,7 @@ public class CurriculosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_curriculos);
 
-        lvLivros = findViewById(R.id.lvLivros);
+        cvCurriculos = findViewById(R.id.cvCurriculo);
         btnAdicionar = findViewById(R.id.btnAdicionar);
 
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
@@ -47,13 +47,13 @@ public class CurriculosActivity extends AppCompatActivity {
         if( lista.size() == 0 ){
             Curriculo fake = new Curriculo("Nenhum livro cadastrado", "...", null);
             lista.add( fake );
-            lvLivros.setEnabled( false );
+            cvCurriculos.setEnabled( false );
         }else {
-            lvLivros.setEnabled( true );
+            cvCurriculos.setEnabled( true );
         }
 
         ArrayAdapter adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, lista);
-        lvLivros.setAdapter( adapter );
+        cvCurriculos.setAdapter( adapter );
     }
 }

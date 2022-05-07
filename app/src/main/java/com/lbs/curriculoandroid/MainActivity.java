@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Spinner spGeneros;
 
+    private String[] gender = {"Select your gender...", "Female", "Male",
+            "Other", "I don't want to talk"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,11 +28,19 @@ public class MainActivity extends AppCompatActivity {
 
         spGeneros = findViewById(R.id.spGenero);
 
-        carregarGeneros();
+        loadGender();
 
     }
 
-    private void carregarGeneros(){
+    private void loadGender(){
+        spGeneros.setEnabled(true);
+        String[] genero = gender;
+        ArrayAdapter adapter = new ArrayAdapter(this,
+                android.R.layout.simple_list_item_1, gender);
+        spGeneros.setAdapter(adapter);
+    }
+
+    /*private void carregarGeneros(){
         Genero fake = new Genero(0, "Selecione o Gênero...");
         List<Genero> lista = GeneroDAO.getGeneros(  this );
         lista.add(0, fake);
@@ -37,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, lista );
         spGeneros.setAdapter( adapter );
 
-    }
+    }*/
 
 
     @Override
@@ -46,42 +57,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if( item.toString().equals("Cadastrar Gênero...")){
-            //          GeneroDAO.inserir(MainActivity.this, "Romance");
-            //          carregarGeneros();
-            cadastrarGenero();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void cadastrarGenero(){
-        AlertDialog.Builder alerta = new AlertDialog.Builder(this);
-        alerta.setTitle("Cadastrar Gênero");
-        alerta.setIcon(android.R.drawable.ic_input_add);
-
-        EditText etNomeGenero = new EditText(this);
-        etNomeGenero.setHint("Digite aqui o nome do gênero...");
-        //    alerta.setMessage("Olá");
-        alerta.setView( etNomeGenero );
-
-        alerta.setNeutralButton("Cancelar", null);
-
-        alerta.setPositiveButton("Salvar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String nome = etNomeGenero.getText().toString();
-                if( !nome.isEmpty() ){
-                    GeneroDAO.inserir(MainActivity.this, nome);
-                    carregarGeneros();
-                }
-            }
-        });
-        alerta.show();
-
-    }
 
 
 }

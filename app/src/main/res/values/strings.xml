@@ -1,13 +1,5 @@
 <resources>
-    <string name="app_name">CurriculoAndroid</string>
-
-    <string-array name="generos">
-        <item>Enter your gender...</item>
-        <item>Female</item>
-        <item>Male</item>
-        <item>Other</item>
-        <item>I don't wanna tell</item>
-    </string-array>
+    <string name="app_name">CurriculoDev</string>
 
     <string name="txtName">Name:</string>
     <string name="txtNameHint">Enter your name</string>
@@ -18,5 +10,15 @@
     <string name="txtLinkedinHint">Enter your Linkedin profile</string>
     <string name="txtBtn">Save</string>
     <string name="txtLanguage">What Programming Languages do you know?</string>
+    <string name="txtGit">GitHub</string>
+    <string name="txtGitHint">Enter your GitHub repository</string>
+
+    <!-- <string-array name="gender">
+        <item>Select your gender...</item>
+        <item>Female</item>
+        <item>Male"</item>
+        <item>Other</item>
+        <item>I don't want to talk</item>
+    </string-array> -->
 
 </resources>
