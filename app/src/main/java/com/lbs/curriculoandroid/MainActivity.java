@@ -40,16 +40,6 @@ public class MainActivity extends AppCompatActivity {
         spGeneros.setAdapter(adapter);
     }
 
-    /*private void carregarGeneros(){
-        Genero fake = new Genero(0, "Selecione o Gênero...");
-        List<Genero> lista = GeneroDAO.getGeneros(  this );
-        lista.add(0, fake);
-
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, lista );
-        spGeneros.setAdapter( adapter );
-
-    }*/
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
