@@ -5,18 +5,29 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Button;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private Spinner spGeneros;
+    private Button btnSalvar;
+    private Curriculo cv;
+    private String acao;
+    private String linguagens = "";
+    private CheckBox checkJava, checkJS, checkC,checkPython, checkPHP, checkKotlin;
 
     private String[] gender = {"Select your gender...", "Female", "Male",
             "Other", "I don't want to talk"};
@@ -28,7 +39,24 @@ public class MainActivity extends AppCompatActivity {
 
         spGeneros = findViewById(R.id.spGenero);
 
+        checkJava = findViewById(R.id.checkJava);
+        checkJS = findViewById(R.id.checkJS);
+        checkKotlin = findViewById(R.id.checkKotlin);
+        checkC = findViewById(R.id.checkC);
+        checkPython = findViewById(R.id.checkPython);
+        checkPHP = findViewById(R.id.checkPHP);
+
         loadGender();
+
+        acao = getIntent().getStringExtra("acao");
+
+        btnSalvar = findViewById(R.id.btnSalvar);
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cadastrarCV();
+            }
+        });
 
     }
 
@@ -40,13 +68,78 @@ public class MainActivity extends AppCompatActivity {
         spGeneros.setAdapter(adapter);
     }
 
+    private void cadastrarCV() {
+        EditText etNome = new EditText(this);
+        EditText etAge = new EditText(this);
+        EditText etLinkedin = new EditText(this);
+        EditText etGit = new EditText(this);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add("Cadastrar Gênero...");
-        return super.onCreateOptionsMenu(menu);
+        etNome = findViewById(R.id.etNome);
+        etAge = findViewById(R.id.etIdade);
+        etLinkedin = findViewById(R.id.etLinkedin);
+        etGit = findViewById(R.id.etGit);
+
+        int posicao = spGeneros.getSelectedItemPosition();
+        String genero = new String();
+        switch(posicao){
+            case 1:
+                genero = "Feminino";
+                break;
+            case 2 :
+                genero = "Masculino";
+                break;
+            case 3:
+                genero = "Outro";
+                break;
+            case 4:
+                genero = "Prefiro não dizer";
+                break;
+            default:
+                genero = "";
+        }
+
+        if(checkJava.isChecked()){
+            linguagens = "Java - ";
+        };
+        if(checkJS.isChecked()){
+            linguagens = linguagens + "JS -";
+        };
+        if(checkC.isChecked()){
+            linguagens = linguagens + "JS -";
+        };
+        if(checkPython.isChecked()){
+            linguagens = linguagens + "JS -";
+        };
+        if(checkPHP.isChecked()){
+            linguagens = linguagens + "JS -";
+        };
+        if(checkKotlin.isChecked()){
+            linguagens = linguagens + "Kotlin -";
+        };
+
+        if (acao.equals("inserir")) {
+            cv = new Curriculo();
+        }
+
+        cv.setNome(etNome.getText().toString());
+        cv.setIdade(etAge.getText().toString());
+        cv.setLinkedin(etLinkedin.getText().toString());
+        cv.setGithub(etGit.getText().toString());
+        cv.setGenero(genero);
+        cv.setLinguagens(linguagens);
+
+        if (acao.equals("inserir")) {
+            CurriculoDAO.inserir(this, cv);
+            Toast.makeText(this, "Currículo cadastrado com sucesso!", Toast.LENGTH_LONG).show();
+        }else{
+            CurriculoDAO.editar(this, cv);
+            Toast.makeText(this, "Currículo atualizado com sucesso!", Toast.LENGTH_LONG).show();
+        }
+        finish();
     }
 
-
+    /*private void carregarForm(){
+        int id = getIntent().getIntExtra(idCurriculo, 0);
+    }*/
 
 }

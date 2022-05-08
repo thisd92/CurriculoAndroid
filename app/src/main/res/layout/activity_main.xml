@@ -149,7 +149,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <CheckBox
-            android:id="@+id/checkBox2"
+            android:id="@+id/checkKotlin"
             style="@style/txtCheckbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -160,7 +160,7 @@
             tools:ignore="MissingConstraints" />
 
         <CheckBox
-            android:id="@+id/checkBox3"
+            android:id="@+id/checkJS"
             style="@style/txtCheckbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -171,7 +171,7 @@
             tools:ignore="MissingConstraints" />
 
         <CheckBox
-            android:id="@+id/checkBox6"
+            android:id="@+id/checkPython"
             style="@style/txtCheckbox"
             android:layout_width="117dp"
             android:layout_height="48dp"
@@ -179,10 +179,10 @@
             android:layout_marginEnd="96dp"
             android:text="Python"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
+            app:layout_constraintTop_toBottomOf="@+id/checkJS" />
 
         <CheckBox
-            android:id="@+id/checkBox4"
+            android:id="@+id/checkC"
             style="@style/txtCheckbox"
             android:layout_width="77dp"
             android:layout_height="48dp"
@@ -190,30 +190,30 @@
             android:layout_marginTop="4dp"
             android:text="C#"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+            app:layout_constraintTop_toBottomOf="@+id/checkKotlin" />
 
         <CheckBox
-            android:id="@+id/checkBox5"
+            android:id="@+id/checkPHP"
             style="@style/txtCheckbox"
             android:layout_width="72dp"
             android:layout_height="48dp"
             android:layout_marginTop="4dp"
             android:text="PHP"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox6"
+            app:layout_constraintEnd_toStartOf="@+id/checkPython"
             app:layout_constraintHorizontal_bias="0.541"
-            app:layout_constraintStart_toEndOf="@+id/checkBox4"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+            app:layout_constraintStart_toEndOf="@+id/checkC"
+            app:layout_constraintTop_toBottomOf="@+id/checkJava" />
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/checkJava"
             style="@style/txtCheckbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
             android:text="Java"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox3"
+            app:layout_constraintEnd_toStartOf="@+id/checkJS"
             app:layout_constraintHorizontal_bias="0.442"
-            app:layout_constraintStart_toEndOf="@+id/checkBox2"
+            app:layout_constraintStart_toEndOf="@+id/checkKotlin"
             app:layout_constraintTop_toBottomOf="@+id/txtProg"
             tools:ignore="MissingConstraints" />
 
@@ -228,7 +228,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox5"
+            app:layout_constraintTop_toBottomOf="@+id/checkPHP"
             app:layout_constraintVertical_bias="0.101" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

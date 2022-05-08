@@ -21,7 +21,6 @@ public class CurriculoDAO {
         valores.put("linkedin", cv.getLinkedin());
         valores.put("github", cv.getGithub());
 
-
         db.insert("curriculos", null, valores);
 
         db.close();
@@ -58,15 +57,15 @@ public class CurriculoDAO {
         Banco conn = new Banco(context);
         SQLiteDatabase db = conn.getReadableDatabase();
 
-        /*Cursor cursor = db.rawQuery(
+        Cursor cursor = db.rawQuery(
                 " SELECT cv.id, cv.nome, cv.idade, cv.genero, cv.linkedin, cv.github " +
                         " FROM curriculos cv " +
                         " ORDER BY cv.nome ",
-                null );*/
+                null );
 
         List<Curriculo> lista = new ArrayList<>();
 
-        /*if( cursor.getCount() > 0 ){
+        if( cursor.getCount() > 0 ){
             cursor.moveToFirst();
 
             do{
@@ -74,14 +73,14 @@ public class CurriculoDAO {
                 Curriculo cv = new Curriculo();
                 cv.setId( cursor.getInt(0));
                 cv.setNome( cursor.getString(1));
-                cv.setIdade( cursor.getInt(2));
+                cv.setIdade( cursor.getString(2));
                 cv.setGenero( cursor.getString(3));
                 cv.setLinkedin( cursor.getString(4));
                 cv.setGithub( cursor.getString(5));
 
                 lista.add( cv );
             }while (cursor.moveToNext());
-        }*/
+        }
         return lista;
     }
 }

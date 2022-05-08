@@ -1,9 +1,13 @@
 package com.lbs.curriculoandroid;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Curriculo {
 
     public int id;
     public String nome, idade, genero, linkedin, github;
+    public String linguagens;
 
     public Curriculo() {
 
@@ -26,7 +30,9 @@ public class Curriculo {
 
     @Override
     public String toString() {
-        return  nome + '\n' + idade;
+        return "Nome: " + nome + '\n' + "Idade: " + idade + '\n' + "Gênero: " + genero +
+                '\n' + "LinkedIn: " + linkedin + '\n' + "GitHub: " + github + '\n' +
+                "Linguagens: " + linguagens;
     }
 
     public int getId() {
@@ -68,4 +74,12 @@ public class Curriculo {
     public String getGithub() { return github; }
 
     public void setGithub(String github) { this.github = github;  }
+
+    public String getLinguagens() {
+        return linguagens;
+    }
+
+    public void setLinguagens(String linguagens) {
+        this.linguagens = linguagens;
+    }
 }
