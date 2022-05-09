@@ -13,12 +13,18 @@ public class Curriculo {
 
     }
 
-    public Curriculo(String nome, String idade, String genero, String linkedin, String github) {
+    public Curriculo(String nome){
+        this.nome = nome;
+    }
+
+    public Curriculo(String nome, String idade, String genero, String linkedin, String github,
+                     String linguagens) {
         this.nome = nome;
         this.idade = idade;
         this.genero = genero;
         this.linkedin = linkedin;
         this.github = github;
+        this.linguagens = linguagens;
     }
 
     public Curriculo(int id, String nome, String idade, String genero) {
@@ -30,9 +36,9 @@ public class Curriculo {
 
     @Override
     public String toString() {
-        return "Nome: " + nome + '\n' + "Idade: " + idade + '\n' + "Gênero: " + genero +
-                '\n' + "LinkedIn: " + linkedin + '\n' + "GitHub: " + github + '\n' +
-                "Linguagens: " + linguagens;
+        return  "#" + id + '\n' + "Nome: " + nome + '\n' + "Idade: " + idade +
+                '\n' + "Gênero: " + genero + '\n' + "LinkedIn: " + linkedin + '\n' +
+                "GitHub: " + github + '\n' + "Linguagens: " + linguagens;
     }
 
     public int getId() {

@@ -21,7 +21,8 @@ public class Banco extends SQLiteOpenHelper {
                 " idade TEXT ," +
                 " genero TEXT, " +
                 " linkedin TEXT ," +
-                " github TEXT ); "
+                " github TEXT , " +
+                " linguagens TEXT ); "
         );
     }
     @Override

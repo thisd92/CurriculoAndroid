@@ -39,16 +39,13 @@ public class MainActivity extends AppCompatActivity {
 
         spGeneros = findViewById(R.id.spGenero);
 
-        checkJava = findViewById(R.id.checkJava);
-        checkJS = findViewById(R.id.checkJS);
-        checkKotlin = findViewById(R.id.checkKotlin);
-        checkC = findViewById(R.id.checkC);
-        checkPython = findViewById(R.id.checkPython);
-        checkPHP = findViewById(R.id.checkPHP);
-
         loadGender();
 
         acao = getIntent().getStringExtra("acao");
+
+        if(acao.equals("editar")) {
+            carregarForm();
+        }
 
         btnSalvar = findViewById(R.id.btnSalvar);
         btnSalvar.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +95,14 @@ public class MainActivity extends AppCompatActivity {
                 genero = "";
         }
 
+        String language = new String();
+        checkJava = findViewById(R.id.checkJava);
+        checkJS = findViewById(R.id.checkJS);
+        checkKotlin = findViewById(R.id.checkKotlin);
+        checkC = findViewById(R.id.checkC);
+        checkPython = findViewById(R.id.checkPython);
+        checkPHP = findViewById(R.id.checkPHP);
+
         if(checkJava.isChecked()){
             linguagens = "Java - ";
         };
@@ -105,17 +110,19 @@ public class MainActivity extends AppCompatActivity {
             linguagens = linguagens + "JS -";
         };
         if(checkC.isChecked()){
-            linguagens = linguagens + "JS -";
+            linguagens = linguagens + "C# -";
         };
         if(checkPython.isChecked()){
-            linguagens = linguagens + "JS -";
+            linguagens = linguagens + "Python -";
         };
         if(checkPHP.isChecked()){
-            linguagens = linguagens + "JS -";
+            linguagens = linguagens + "PHP -";
         };
         if(checkKotlin.isChecked()){
             linguagens = linguagens + "Kotlin -";
         };
+
+        language = linguagens;
 
         if (acao.equals("inserir")) {
             cv = new Curriculo();
@@ -126,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         cv.setLinkedin(etLinkedin.getText().toString());
         cv.setGithub(etGit.getText().toString());
         cv.setGenero(genero);
-        cv.setLinguagens(linguagens);
+        cv.setLinguagens(language);
 
         if (acao.equals("inserir")) {
             CurriculoDAO.inserir(this, cv);
@@ -138,8 +145,31 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    /*private void carregarForm(){
-        int id = getIntent().getIntExtra(idCurriculo, 0);
-    }*/
+    private void carregarForm(){
+        int id = getIntent().getIntExtra("idCurriculo",0);
+        cv = CurriculoDAO.getCurriculoByID(this, id);
+
+        EditText etNome = new EditText(this);
+        EditText etAge = new EditText(this);
+        EditText etLinkedin = new EditText(this);
+        EditText etGit = new EditText(this);
+
+        etNome.setText(cv.getNome());
+        etAge.setText(cv.getIdade());
+        etLinkedin.setText(cv.getLinkedin());
+        etGit.setText(cv.getGithub());
+        etNome.setText(cv.getNome());
+
+        String[] generos = gender;
+        for (int i = 1; i < generos.length; i++){
+            if(cv.getGenero().equals(generos[i])){
+                spGeneros.setSelection(i);
+
+                break;
+            }
+        }
+
+
+    }
 
 }

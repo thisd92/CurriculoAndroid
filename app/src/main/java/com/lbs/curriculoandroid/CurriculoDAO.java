@@ -20,6 +20,7 @@ public class CurriculoDAO {
         valores.put("genero", cv.getGenero());
         valores.put("linkedin", cv.getLinkedin());
         valores.put("github", cv.getGithub());
+        valores.put("linguagens", cv.getLinguagens());
 
         db.insert("curriculos", null, valores);
 
@@ -37,6 +38,7 @@ public class CurriculoDAO {
         valores.put("genero", cv.getGenero());
         valores.put("linkedin", cv.getLinkedin());
         valores.put("github", cv.getGithub());
+        valores.put("linguagens", cv.getLinguagens());
 
         db.update("curriculos", valores, " id = " + cv.getId(), null);
 
@@ -58,7 +60,7 @@ public class CurriculoDAO {
         SQLiteDatabase db = conn.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(
-                " SELECT cv.id, cv.nome, cv.idade, cv.genero, cv.linkedin, cv.github " +
+                " SELECT cv.id, cv.nome, cv.idade, cv.genero, cv.linkedin, cv.github, cv.linguagens " +
                         " FROM curriculos cv " +
                         " ORDER BY cv.nome ",
                 null );
@@ -77,10 +79,41 @@ public class CurriculoDAO {
                 cv.setGenero( cursor.getString(3));
                 cv.setLinkedin( cursor.getString(4));
                 cv.setGithub( cursor.getString(5));
+                cv.setLinguagens( cursor.getString(6));
 
                 lista.add( cv );
             }while (cursor.moveToNext());
         }
         return lista;
+    }
+
+    public static Curriculo getCurriculoByID(Context context, int idCurriculo) {
+        List<Curriculo> listaCurriculos = new ArrayList<>();
+        Banco conn = new Banco(context);
+
+        SQLiteDatabase db = conn.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT cv.id, cv.nome, cv.idade, cv.genero, cv.linkedin, cv.github, cv.linguagens "  +
+                " FROM curriculos cv WHERE id = " + idCurriculo, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+
+            Curriculo cv = new Curriculo();
+
+            cv.setId( cursor.getInt(0));
+            cv.setNome( cursor.getString(1));
+            cv.setIdade( cursor.getString(2));
+            cv.setGenero( cursor.getString(3));
+            cv.setLinkedin( cursor.getString(4));
+            cv.setGithub( cursor.getString(5));
+            cv.setLinguagens( cursor.getString(6));
+
+            return cv;
+        }
+        else
+        {
+            return  null;
+        }
     }
 }
