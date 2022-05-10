@@ -36,7 +36,7 @@ public class Curriculo {
 
     @Override
     public String toString() {
-        return  "#" + id + '\n' + "Nome: " + nome + '\n' + "Idade: " + idade +
+        return  "Nome: " + nome + '\n' + "Idade: " + idade +
                 '\n' + "Gênero: " + genero + '\n' + "LinkedIn: " + linkedin + '\n' +
                 "GitHub: " + github + '\n' + "Linguagens: " + linguagens;
     }

@@ -1,35 +1,25 @@
 package com.lbs.curriculoandroid;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private Spinner spGeneros;
-    private Button btnSalvar;
     private Curriculo cv;
     private String acao;
     private String linguagens = "";
     private CheckBox checkJava, checkJS, checkC,checkPython, checkPHP, checkKotlin;
+    private EditText etNome, etAge, etLinkedin, etGit;
 
-    private String[] gender = {"Select your gender...", "Female", "Male",
+    private final String[] gender = {"Select your gender...", "Female", "Male",
             "Other", "I don't want to talk"};
 
     @Override
@@ -47,37 +37,29 @@ public class MainActivity extends AppCompatActivity {
             carregarForm();
         }
 
-        btnSalvar = findViewById(R.id.btnSalvar);
-        btnSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cadastrarCV();
-            }
-        });
+        Button btnSalvar = findViewById(R.id.btnSalvar);
+        btnSalvar.setOnClickListener(v -> cadastrarCV());
 
     }
 
     private void loadGender(){
         spGeneros.setEnabled(true);
-        String[] genero = gender;
         ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1, gender);
         spGeneros.setAdapter(adapter);
     }
 
+    // Método para salvar o currículo
     private void cadastrarCV() {
-        EditText etNome = new EditText(this);
-        EditText etAge = new EditText(this);
-        EditText etLinkedin = new EditText(this);
-        EditText etGit = new EditText(this);
 
         etNome = findViewById(R.id.etNome);
         etAge = findViewById(R.id.etIdade);
         etLinkedin = findViewById(R.id.etLinkedin);
         etGit = findViewById(R.id.etGit);
 
+        // Tratamento do Spinner para transformar em texto para salvar no banco
         int posicao = spGeneros.getSelectedItemPosition();
-        String genero = new String();
+        String genero;
         switch(posicao){
             case 1:
                 genero = "Feminino";
@@ -95,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 genero = "";
         }
 
-        String language = new String();
+        // Tratamento para concatenar o valor dos checkbox e salvar no banco
         checkJava = findViewById(R.id.checkJava);
         checkJS = findViewById(R.id.checkJS);
         checkKotlin = findViewById(R.id.checkKotlin);
@@ -105,25 +87,24 @@ public class MainActivity extends AppCompatActivity {
 
         if(checkJava.isChecked()){
             linguagens = "Java - ";
-        };
+        }
         if(checkJS.isChecked()){
-            linguagens = linguagens + "JS -";
-        };
+            linguagens = linguagens + "JS-";
+        }
         if(checkC.isChecked()){
-            linguagens = linguagens + "C# -";
-        };
+            linguagens = linguagens + "C#-";
+        }
         if(checkPython.isChecked()){
-            linguagens = linguagens + "Python -";
-        };
+            linguagens = linguagens + "Python-";
+        }
         if(checkPHP.isChecked()){
-            linguagens = linguagens + "PHP -";
-        };
+            linguagens = linguagens + "PHP-";
+        }
         if(checkKotlin.isChecked()){
-            linguagens = linguagens + "Kotlin -";
-        };
+            linguagens = linguagens + "Kotlin-";
+        }
 
-        language = linguagens;
-
+        // Se a ação for inserir, irá gerar um novo currículo
         if (acao.equals("inserir")) {
             cv = new Curriculo();
         }
@@ -133,8 +114,9 @@ public class MainActivity extends AppCompatActivity {
         cv.setLinkedin(etLinkedin.getText().toString());
         cv.setGithub(etGit.getText().toString());
         cv.setGenero(genero);
-        cv.setLinguagens(language);
+        cv.setLinguagens(linguagens);
 
+        // Se a ação passada no Intent for inserir, irá salvar no banco, se não, vai dar update
         if (acao.equals("inserir")) {
             CurriculoDAO.inserir(this, cv);
             Toast.makeText(this, "Currículo cadastrado com sucesso!", Toast.LENGTH_LONG).show();
@@ -145,31 +127,73 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    // Método para carregar o formulário
     private void carregarForm(){
-        int id = getIntent().getIntExtra("idCurriculo",0);
-        cv = CurriculoDAO.getCurriculoByID(this, id);
+        int idCurriculo = getIntent().getIntExtra("idCurriculo",0);
 
-        EditText etNome = new EditText(this);
-        EditText etAge = new EditText(this);
-        EditText etLinkedin = new EditText(this);
-        EditText etGit = new EditText(this);
+        etNome = findViewById(R.id.etNome);
+        etAge = findViewById(R.id.etIdade);
+        etLinkedin = findViewById(R.id.etLinkedin);
+        etGit = findViewById(R.id.etGit);
 
-        etNome.setText(cv.getNome());
-        etAge.setText(cv.getIdade());
-        etLinkedin.setText(cv.getLinkedin());
-        etGit.setText(cv.getGithub());
-        etNome.setText(cv.getNome());
+        // Se o id carregar diferente de 0, irá carregar o currículo do banco
+        if(idCurriculo != 0){
+            cv = CurriculoDAO.getCurriculoByID(this, idCurriculo);
 
-        String[] generos = gender;
-        for (int i = 1; i < generos.length; i++){
-            if(cv.getGenero().equals(generos[i])){
-                spGeneros.setSelection(i);
+            etNome.setText(cv.nome);
+            etAge.setText(cv.idade);
+            etLinkedin.setText(cv.linkedin);
+            etGit.setText(cv.github);
 
-                break;
+            // Tratamento do genero recebido
+            String genero = cv.genero;
+            int idGen;
+            switch(genero){
+                case "Feminino":
+                    idGen = 1;
+                    break;
+                case "Masculino":
+                    idGen = 2;
+                    break;
+                case "Outro":
+                    idGen = 3;
+                    break;
+                case "Prefiro não dizer":
+                    idGen = 4;
+                    break;
+                default:
+                    idGen = 0;
+            }
+            spGeneros.setSelection(idGen);
+
+            // Tratamento dos checkbox
+            checkJava = findViewById(R.id.checkJava);
+            checkJS = findViewById(R.id.checkJS);
+            checkKotlin = findViewById(R.id.checkKotlin);
+            checkC = findViewById(R.id.checkC);
+            checkPython = findViewById(R.id.checkPython);
+            checkPHP = findViewById(R.id.checkPHP);
+
+            String linguagens = cv.linguagens;
+            if(linguagens.contains("Java")){
+                checkJava.setChecked(true);
+            }
+            if(linguagens.contains("JS")){
+                checkJS.setChecked(true);
+            }
+            if(linguagens.contains("C#")){
+                checkC.setChecked(true);
+            }
+            if(linguagens.contains("PHP")){
+                checkPHP.setChecked(true);
+            }
+            if(linguagens.contains("Python")){
+                checkPython.setChecked(true);
+            }
+            if(linguagens.contains("Kotlin")){
+                checkKotlin.setChecked(true);
             }
         }
-
-
     }
 
 }

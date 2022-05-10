@@ -88,9 +88,7 @@ public class CurriculoDAO {
     }
 
     public static Curriculo getCurriculoByID(Context context, int idCurriculo) {
-        List<Curriculo> listaCurriculos = new ArrayList<>();
         Banco conn = new Banco(context);
-
         SQLiteDatabase db = conn.getReadableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT cv.id, cv.nome, cv.idade, cv.genero, cv.linkedin, cv.github, cv.linguagens "  +
@@ -111,8 +109,7 @@ public class CurriculoDAO {
 
             return cv;
         }
-        else
-        {
+        else{
             return  null;
         }
     }
