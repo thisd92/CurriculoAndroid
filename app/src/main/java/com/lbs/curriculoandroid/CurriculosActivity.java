@@ -1,5 +1,6 @@
 package com.lbs.curriculoandroid;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -57,6 +58,16 @@ public class CurriculosActivity extends AppCompatActivity {
             public void onSwipeLeft(){
                 super.onSwipeLeft();
                 carregarForm();
+            }
+
+            // Atualizar a intent
+            @Override
+            public void onSwipeBottom(){
+                super.onSwipeBottom();
+                Intent intent = new Intent(getIntent());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                finish();
+                startActivity(intent);
             }
         });
 
