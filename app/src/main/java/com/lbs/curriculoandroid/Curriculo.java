@@ -1,12 +1,8 @@
 package com.lbs.curriculoandroid;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Curriculo {
 
-    public int id;
-    public String nome, idade, genero, linkedin, github;
+    public String id, nome, idade, genero, linkedin, github;
     public String linguagens;
 
     public Curriculo() {
@@ -27,7 +23,7 @@ public class Curriculo {
         this.linguagens = linguagens;
     }
 
-    public Curriculo(int id, String nome, String idade, String genero) {
+    public Curriculo(String id, String nome, String idade, String genero) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
@@ -41,11 +37,11 @@ public class Curriculo {
                 "GitHub: " + github + '\n' + "Linguagens: " + linguagens;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -69,9 +65,9 @@ public class Curriculo {
         return genero;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
+    public void setGenero(String genero) { this.genero = genero; }
+
+    public String setGeneros(String genero) { this.genero = genero; return genero;}
 
     public String getLinkedin() { return linkedin; }
 
@@ -87,5 +83,10 @@ public class Curriculo {
 
     public void setLinguagens(String linguagens) {
         this.linguagens = linguagens;
+    }
+
+    public String setLinguagem(String linguagens) {
+        this.linguagens = linguagens;
+        return linguagens;
     }
 }

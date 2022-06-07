@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "899277007353",
+    "project_id": "curriculodev-5700d",
+    "storage_bucket": "curriculodev-5700d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899277007353:android:e57973cd359fd08cd73528",
+        "android_client_info": {
+          "package_name": "com.lbs.curriculoandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "899277007353-ngdbaiumk1bbhlk6g4db5ib5deko2up4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDn0-vJkVuQwBUBQ0FzFHriNOXeI1-SoiQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "899277007353-ngdbaiumk1bbhlk6g4db5ib5deko2up4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
