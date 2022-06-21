@@ -193,4 +193,8 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    public void deleteCV(){
+
+    }
+
 }

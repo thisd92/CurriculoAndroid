@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Thiago/AndroidStudioProjects/Firebase CurriculoDev/CurriculoAndroid/app/src/main/res/drawable/color_btn.xml" value="0.1835" />
+        <entry key="..\:/Users/Thiago/AndroidStudioProjects/Firebase CurriculoDev/CurriculoAndroid/app/src/main/res/layout/activity_curriculos.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/Thiago/AndroidStudioProjects/Firebase CurriculoDev/CurriculoAndroid/app/src/main/res/layout/activity_curriculosfiltered.xml" value="0.1503623188405797" />
         <entry key="..\:/Users/Thiago/Documents/GitHub/CurriculoAndroid/app/src/main/res/drawable/color_btn.xml" value="0.174" />
         <entry key="..\:/Users/Thiago/Documents/GitHub/CurriculoAndroid/app/src/main/res/drawable/ic_launcher_background.xml" value="0.174" />
         <entry key="..\:/Users/Thiago/Documents/GitHub/CurriculoAndroid/app/src/main/res/layout/activity_curriculos.xml" value="0.25" />
