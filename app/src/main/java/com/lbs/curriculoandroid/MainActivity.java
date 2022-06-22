@@ -1,6 +1,10 @@
 package com.lbs.curriculoandroid;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -8,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
@@ -103,6 +108,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Menu para cadastrar currículos
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add("Avaliar Currículo");
+        menu.add("Deletar Currículo");
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // Verifica o item do menu para carregar a activity de cadastro
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if( item.toString().equals("Deletar Currículo")){
+            deleteCV();
+        }else{
+            avaliar();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void loadGender(){
         spGeneros.setEnabled(true);
         ArrayAdapter adapter = new ArrayAdapter(this,
@@ -176,17 +200,16 @@ public class MainActivity extends AppCompatActivity {
         cv.setGithub(etGit.getText().toString());
         cv.setGenero(genero);
         cv.setLinguagens(linguagens);
+        cv.setNota("");
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference();
 
         // Se a ação passada no Intent for inserir, irá salvar no banco, se não, vai dar update
         if (acao.equals("inserir")) {
-        //    CurriculoDAO.inserir(this, cv);
             reference.child("curriculos").push().setValue(cv);
             Toast.makeText(this, "Currículo cadastrado com sucesso!", Toast.LENGTH_LONG).show();
         }else{
-        //    CurriculoDAO.editar(this, cv);
             reference.child("curriculos").child(cv.getId()).setValue(cv);
             Toast.makeText(this, "Currículo atualizado com sucesso!", Toast.LENGTH_LONG).show();
         }
@@ -194,7 +217,57 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void deleteCV(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference();
 
+        if(acao.equals("editar")){
+            Curriculo curriculo = new Curriculo();
+            curriculo.setId(getIntent().getExtras().getString("idCurriculo"));
+            curriculo.setNome(getIntent().getExtras().getString("nome"));
+            AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity.this);
+            alerta.setIcon(android.R.drawable.ic_input_delete);
+            alerta.setTitle("Excluir");
+            alerta.setMessage("Confirma exclusão do currículo de " + curriculo.getNome() +  "?");
+            alerta.setNeutralButton("Cancelar", null);
+            alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    reference.child("curriculos").child(cv.getId()).removeValue(null);
+                    Toast.makeText(MainActivity.this, "Currículo excluído!",
+                            Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            });
+            alerta.show();
+        }
     }
 
+    public void avaliar(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference();
+
+        if (acao.equals("editar")){
+            Curriculo curriculo = new Curriculo();
+            AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity.this);
+            alerta.setIcon(android.R.drawable.ic_input_add);
+            alerta.setTitle("Avaliar");
+
+            EditText etNota = new EditText(this);
+            etNota.setHint("Digite aqui a nota...");
+            alerta.setView(etNota);
+
+            alerta.setNeutralButton("Cancelar", null);
+            alerta.setPositiveButton("Salvar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    curriculo.setNota(etNota.getText().toString());
+                    reference.child("curriculos").child(cv.getId()).child("nota").setValue(curriculo);
+                    Toast.makeText(MainActivity.this, "Avaliação salva!",
+                            Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            });
+            alerta.show();
+        }
+    }
 }

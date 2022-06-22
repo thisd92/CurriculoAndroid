@@ -3,7 +3,7 @@ package com.lbs.curriculoandroid;
 public class Curriculo {
 
     public String id, nome, idade, genero, linkedin, github;
-    public String linguagens;
+    public String linguagens, nota;
 
     public Curriculo() {
 
@@ -14,13 +14,14 @@ public class Curriculo {
     }
 
     public Curriculo(String nome, String idade, String genero, String linkedin, String github,
-                     String linguagens) {
+                     String linguagens, String nota) {
         this.nome = nome;
         this.idade = idade;
         this.genero = genero;
         this.linkedin = linkedin;
         this.github = github;
         this.linguagens = linguagens;
+        this.nota = nota;
     }
 
     public Curriculo(String id, String nome, String idade, String genero) {
@@ -88,5 +89,13 @@ public class Curriculo {
     public String setLinguagem(String linguagens) {
         this.linguagens = linguagens;
         return linguagens;
+    }
+
+    public String getNota() {
+        return nota;
+    }
+
+    public void setNota(String nota) {
+        this.nota = nota;
     }
 }

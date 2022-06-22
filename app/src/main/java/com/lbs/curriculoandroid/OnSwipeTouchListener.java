@@ -55,10 +55,15 @@ public class OnSwipeTouchListener implements OnTouchListener {
                 }
                 result = true;
 
+                onLongPress();
+
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
             return result;
+        }
+
+        private void onLongPress() {
         }
     }
 

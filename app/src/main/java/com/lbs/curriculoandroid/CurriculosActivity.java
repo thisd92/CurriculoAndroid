@@ -48,29 +48,6 @@ public class CurriculosActivity extends AppCompatActivity {
 
         lvCurriculos = findViewById(R.id.cvCurriculos);
 
-        lvCurriculos.setOnItemLongClickListener(new OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Curriculo cvSelected = lista.get(position);
-                AlertDialog.Builder alerta = new AlertDialog.Builder(CurriculosActivity.this);
-                alerta.setIcon(android.R.drawable.ic_input_delete);
-                alerta.setTitle("Excluir");
-                alerta.setMessage("Confirma exclusão do currículo de " + cvSelected.getNome() + "?");
-                alerta.setNeutralButton("Cancelar", null);
-                alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        reference.child("curriculos").child(cvSelected.getId()).removeValue(null);
-                        cvCarregar();
-                        Toast.makeText(CurriculosActivity.this, "Currículo excluído!",
-                                Toast.LENGTH_LONG).show();
-                    }
-                });
-                alerta.show();
-                return true;
-            }
-        });
-
         // Implementa Swipe para esquerda para adicionar novo currículo
         lvCurriculos.setOnTouchListener(new OnSwipeTouchListener(this){
             @Override
@@ -113,11 +90,12 @@ public class CurriculosActivity extends AppCompatActivity {
         });
     }
 
-    // Menu para cadastrar currículos
+    // Menu para deletar currículo
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add("Cadastrar Currículo");
-        menu.add("Filtrar por Nome");
+        menu.add("Filtrar por Nota");
+        menu.add("Ordenar por Nome");
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -127,8 +105,10 @@ public class CurriculosActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if( item.toString().equals("Cadastrar Currículo")){
             carregarForm();
+        }else if(item.toString().equals("Ordenar por Nome")){
+            filterName();
         }else{
-            filter();
+            filterNota();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -222,10 +202,10 @@ public class CurriculosActivity extends AppCompatActivity {
         query.removeEventListener(childEventListener);
     }
 
-    private void filter() {
+    private void filterName() {
         AlertDialog.Builder alerta = new AlertDialog.Builder(this);
-        alerta.setTitle("Filtro por Nome");
-        alerta.setIcon(android.R.drawable.ic_input_add);
+        alerta.setTitle("Ordenar por Nome");
+        alerta.setIcon(android.R.drawable.ic_input_get);
         EditText etNome = new EditText(this);
         etNome.setHint("Digite aqui o nome...");
         alerta.setView(etNome);
@@ -234,74 +214,47 @@ public class CurriculosActivity extends AppCompatActivity {
         alerta.setPositiveButton("Filtrar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String nome = etNome.getText().toString();
+                String nome;
+                nome = etNome.getText().toString();
                 if (!nome.isEmpty()) {
-                    loadFilter(nome);
+                    loadFilterName(nome);
                 }
             }
         });
         alerta.show();
     }
 
-    private void loadFilter(String nome){
+    private void filterNota() {
+        AlertDialog.Builder alerta = new AlertDialog.Builder(this);
+        alerta.setTitle("Ordenar por Nota");
+        alerta.setIcon(android.R.drawable.ic_input_get);
+        EditText etNota = new EditText(this);
+        etNota.setHint("Digite a avaliação...");
+        alerta.setView(etNota);
+        alerta.setNeutralButton("Cancelar", null);
+
+        alerta.setPositiveButton("Filtrar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String nota;
+                nota = etNota.getText().toString();
+                if (!nota.isEmpty()) {
+                    loadFilterNota(nota);
+                }
+            }
+        });
+        alerta.show();
+    }
+
+    private void loadFilterName(String nome){
         lista.clear();
         Query curriculos = reference.child("curriculos").orderByChild("nome").startAt(nome);
+        curriculos.addChildEventListener(childEventListener);
+    }
 
-        childEventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Curriculo cv = new Curriculo();
-                cv.setId(snapshot.getKey());
-                cv.setNome(snapshot.child("nome").getValue(String.class));
-                cv.setIdade(snapshot.child("idade").getValue(String.class));
-                cv.setGenero(snapshot.child("genero").getValue(String.class));
-                cv.setGithub(snapshot.child("github").getValue(String.class));
-                cv.setLinkedin(snapshot.child("linkedin").getValue(String.class));
-                cv.setLinguagens(snapshot.child("linguagens").getValue(String.class));
-                lista.add(cv);
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                String idCurriculo = snapshot.getKey();
-                for(Curriculo cv : lista){
-                    if(cv.getId().equals(idCurriculo)) {
-                        cv.setNome(snapshot.child("nome").getValue(String.class));
-                        cv.setIdade(snapshot.child("idade").getValue(String.class));
-                        cv.setGenero(snapshot.child("genero").getValue(String.class));
-                        cv.setGithub(snapshot.child("github").getValue(String.class));
-                        cv.setLinkedin(snapshot.child("linkedin").getValue(String.class));
-                        cv.setLinguagens(snapshot.child("linguagens").getValue(String.class));
-                    }
-                }
-
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                String idCurriculo = snapshot.getKey();
-                for(Curriculo cv : lista){
-                    if(cv.getId().equals(idCurriculo)){
-                        lista.remove(cv);
-                        break;
-                    }
-                }
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-
+    private void loadFilterNota(String nota){
+        lista.clear();
+        Query curriculos = reference.child("curriculos").orderByChild("nota/nota").equalTo(nota);
         curriculos.addChildEventListener(childEventListener);
     }
 
